@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<link rel="icon" href="logo.png" type="image/png">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>GuaruSeguro</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  >
+
+</head>
+
+<body class="bg-grid">
+
+  <div
+  class="alerta-topo"
+  id="alerta-topo"
+>
+
+  ⚠️ ALERTA DE TEMPESTADE EM GUARULHOS
+
+</div>
+
+  <nav>
+
+    <div class="logo">
+      <span>GuaruSeguro</span>
+    </div>
+
+    <div class="links">
+
+      <a href="#inicio">Início</a>
+
+      <a href="#clima">Clima</a>
+
+      <a href="#mapa-risco">
+        Mapa de Risco
+      </a>
+
+    <a href="#alerta">
+  Alertas
+</a>
+
+    </div>
+
+    <div class="vazio"></div>
+
+  </nav>
+
+  <div class="container">
+
+    <header class="hero" id="inicio">
+
+      <div class="hero-texto">
+
+        <h1>
+          Antecipe riscos. Proteja vidas.
+        </h1>
+
+        <p>
+          Monitoramento climático, alertas preventivos e
+          informações em tempo real.
+        </p>
+
+        <div class="hero-botoes">
+
+          <a href="#clima">
+            Previsão do tempo
+          </a>
+
+          <a href="#mapa-risco">
+            Ver mapa de risco
+          </a>
+
+         <a href="#alerta">
+  Alertas
+</a>
+        </div>
+
+      </div>
+
+      <div class="hero-imagem">
+
+        <img
+          src="https://b3577058.smushcdn.com/3577058/wp-content/uploads/2022/05/Viaduto-Cidade-Guarulhos-sp-viviane-giacometti-720x511.jpg?lossy=1&strip=0&webp=1"
+          alt="Guarulhos"
+        >
+
+      </div>
+
+    </header>
+
+    <main>
+
+      <!-- FUNCIONALIDADES -->
+
+      <section class="funcionalidades">
+
+        <span class="mini-titulo">
+          Funcionalidades
+        </span>
+
+        <h2>
+          Ferramentas para monitoramento e prevenção
+        </h2>
+
+        <p class="descricao">
+          O GuaruSeguro reúne informações climáticas,
+          alertas preventivos e monitoramento em tempo real
+          para ajudar a população de Guarulhos.
+        </p>
+
+        <div class="cards">
+
+          <div class="card">
+
+            <h3>Previsão do tempo</h3>
+
+            <p>
+              Acompanhe previsões climáticas e possíveis chuvas intensas.
+            </p>
+
+          </div>
+
+          <div class="card">
+
+            <h3>Mapa de risco</h3>
+
+            <p>
+              Visualize áreas vulneráveis a enchentes em Guarulhos.
+            </p>
+
+          </div>
+
+          <div class="card">
+
+            <h3>Alertas preventivos</h3>
+
+            <p>
+              Receba informações importantes sobre riscos climáticos.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- SOBRE -->
+
+      <section class="sobre">
+
+        <div class="sobre-imagem">
+
+          <img
+            src="https://img.dhost.cloud/RSD5HeqdV6uE018CybkcsE_pXSE=/971x566/smart/https://tdan.nyc3.digitaloceanspaces.com/images/7c768/518f68807e214acd6ba2d34f3537b1e6575.png"
+            alt="Enchentes em Guarulhos"
+          >
+
+        </div>
+
+        <div class="sobre-texto">
+
+          <span class="mini-titulo">
+            Sobre o projeto
+          </span>
+
+          <h2>
+            Tecnologia e conscientização para reduzir os impactos das enchentes
+          </h2>
+
+          <p>
+            O GuaruSeguro é um projeto escolar desenvolvido
+            com o objetivo de unir tecnologia, informação
+            climática e prevenção.
+          </p>
+
+        </div>
+
+      </section>
+
+      <!-- OBJETIVOS -->
+
+      <section
+        class="objetivos"
+        id="objetivos"
+      >
+
+        <span class="mini-titulo">
+          Objetivos
+        </span>
+
+        <h2>
+          Como o GuaruSeguro busca ajudar a população
+        </h2>
+
+        <div class="objetivos-cards">
+
+          <div class="objetivo-card">
+
+            <h3>Prevenção</h3>
+
+            <p>
+              Informar sobre riscos climáticos e enchentes.
+            </p>
+
+          </div>
+
+          <div class="objetivo-card">
+
+            <h3>Monitoramento</h3>
+
+            <p>
+              Acompanhar condições climáticas em tempo real.
+            </p>
+
+          </div>
+
+          <div class="objetivo-card">
+
+            <h3>Conscientização</h3>
+
+            <p>
+              Incentivar segurança e preparação urbana.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="alerta-climatico" id="alerta">
+
+  <div class="alerta-box" id="alerta-box">
+
+    <h3 id="alerta-titulo">
+      Monitoramento climático ativo
+    </h3>
+
+    <p id="alerta-texto">
+      Verificando condições climáticas...
+    </p>
+
+  </div>
+
+</section>
+
+      <!-- CLIMA -->
+
+      <section class="clima" id="clima">
+
+        <span class="mini-titulo">
+          Clima em tempo real
+        </span>
+
+        <h2>
+          Condições climáticas atuais em Guarulhos
+        </h2>
+
+        <div class="clima-card">
+
+          <h3 id="temperatura">
+            --
+          </h3>
+
+          <p id="descricao-clima">
+            Carregando...
+          </p>
+
+        </div>
+
+      </section>
+
+      <!-- PREVISÃO -->
+
+      <section
+        class="previsao-semana"
+        id="previsao"
+      >
+
+        <span class="mini-titulo">
+          Previsão da semana
+        </span>
+
+        <h2>
+          Próximos dias em Guarulhos
+        </h2>
+
+        <div
+          class="previsao-cards"
+          id="previsao-cards"
+        >
+
+        </div>
+
+      </section>
+
+      <!-- MAPA -->
+
+      <section
+        class="mapa-risco"
+        id="mapa-risco"
+      >
+
+        <span class="mini-titulo" id="titulo-mapa">
+          Monitoramento urbano
+        </span>
+
+        <h2>
+          Áreas com maior risco de enchentes
+        </h2>
+
+        <p class="descricao">
+          Visualize regiões vulneráveis e acompanhe
+          pontos críticos de alagamento em Guarulhos.
+        </p>
+
+        <div id="mapa-guarulhos"></div>
+
+      </section>
+
+    </main>
+
+    <footer>
+
+      <div class="footer-conteudo">
+
+        <div class="footer-info">
+
+          <h2>GuaruSeguro</h2>
+
+          <p>
+            Projeto escolar voltado ao monitoramento climático
+            e prevenção de enchentes em Guarulhos.
+          </p>
+
+        </div>
+
+        <div class="footer-links">
+
+          <a href="#inicio">Início</a>
+
+          <a href="#clima">Clima</a>
+
+          <a href="#mapa-risco">
+            Mapa
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <p>
+          © 2026 GuaruSeguro • Projeto escolar
+        </p>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet/dist/leaflet.js">
+  </script>
+
+  <!-- JS principal -->
+  <script src="main.js"></script>
+
+</body>
+</html>
