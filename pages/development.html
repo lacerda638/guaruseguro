@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuaruSeguro - Desenvolvimento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+/* O body agora fica normal para não quebrar o 'position: fixed' da navbar */
+body {
+  background:#ebf4ff;
+  color:#111827;
+}
+
+/* Criamos a classe para o container de conteúdo que vai transicionar */
+.page-content {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Classe de entrada suave */
+.page-content.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Classe de saída suave */
+.page-content.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+    .fade-exit {
+  opacity: 0 !important;
+  transform: translateY(-8px) !important;
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+    /* CSS Base e Navbar fornecidos */
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Inter', sans-serif;
+      background:#ebf4ff;
+      color:#111827;
+    }
+
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:1000;
+      background:rgba(255,255,255,0.18);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,0.2);
+    }
+
+    .navbar{
+      width:90%;
+      max-width:1400px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px 0;
+    }
+
+    .logo h1{
+      color:#2563eb;
+      font-size:1.8rem;
+      font-weight:700;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:35px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:#1f2937;
+      font-weight:600;
+      transition:0.3s;
+      position:relative;
+    }
+
+    .nav-links a::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0%;
+      height:2px;
+      background:#2563eb;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#2563eb;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:120px 20px 80px;
+      background:
+        linear-gradient(
+          rgba(255,255,255,0.20),
+          rgba(235,244,255,0.55)
+        ),
+        url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=2070');
+      background-size:cover;
+      background-position:center;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:100%;
+      height:260px;
+      background:linear-gradient(
+        to bottom,
+        rgba(235,244,255,0),
+        #ebf4ff
+      );
+      pointer-events:none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag{
+      color:#2563eb;
+      font-weight:700;
+      margin-bottom:18px;
+      letter-spacing:1px;
+    }
+
+    .hero h1{
+      font-size:4rem;
+      line-height:1.1;
+      margin-bottom:25px;
+    }
+
+    .hero-description{
+      font-size:1.1rem;
+      line-height:1.8;
+      color:#4b5563;
+      margin-bottom:40px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary{
+      padding:15px 32px;
+      border-radius:18px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .btn-primary{
+      background:#2563eb;
+      color:white;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.25);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-5px);
+      box-shadow: 0 18px 35px rgba(37,99,235,0.35);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,0.4);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.4);
+      color:#111827;
+    }
+
+    .btn-secondary:hover{
+      transform:translateY(-5px);
+      background:rgba(255,255,255,0.6);
+    }
+
+    /* SECTIONS COMPARTILHADAS */
+    section{
+      padding:100px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    .section-title p{
+      color:#2563eb;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .section-title h2{
+      font-size:2.7rem;
+    }
+
+    /* Glassmorphism Container Base */
+    .glass-container {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+
+    /* 1. ESTILIZAÇÃO 5W2H (Tabelas Responsivas) */
+    .table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    .sprint-title {
+      font-size: 1.3rem;
+      color: #2563eb;
+      margin: 25px 0 15px;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    th {
+      background: #2563eb;
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background: rgba(37, 99, 235, 0.04);
+    }
+
+    /* 2. ESTILIZAÇÃO MATRIZ SWOT */
+    .swot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 11fr);
+      gap: 25px;
+    }
+
+    .swot-card {
+      padding: 30px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: transform 0.3s;
+    }
+
+    .swot-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .swot-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .swot-card ul {
+      list-style-position: inside;
+      line-height: 1.8;
+      color: #4b5563;
+    }
+
+    .swot-card li {
+      margin-bottom: 8px;
+    }
+
+    .swot-forcas h3 { color: #10b981; }  /* Verde */
+    .swot-fraquezas h3 { color: #ef4444; } /* Vermelho */
+    .swot-oportunidades h3 { color: #3b82f6; } /* Azul */
+    .swot-ameacas h3 { color: #f59e0b; } /* Laranja */
+
+    /* 3. ESTILIZAÇÃO ISHIKAWA */
+    .ishikawa-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .ishikawa-box {
+      background: rgba(255, 255, 255, 0.6);
+      border-left: 5px solid #2563eb;
+      padding: 25px;
+      border-radius: 0 20px 20px 0;
+    }
+
+    .ishikawa-box h3 {
+      color: #1f2937;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .ishikawa-box ul {
+      list-style-type: none;
+      color: #4b5563;
+    }
+
+    .ishikawa-box li {
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .ishikawa-box li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    .ishikawa-efeito {
+      background: #2563eb;
+      color: white;
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+    }
+
+    /* 4. ESTILIZAÇÃO BUSINESS MODEL CANVAS */
+    .bmc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: auto auto;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .bmc-box {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      padding: 20px;
+      border-radius: 18px;
+    }
+
+    .bmc-box h3 {
+      font-size: 1rem;
+      color: #2563eb;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding-bottom: 5px;
+    }
+
+    .bmc-box ul {
+      list-style: none;
+      font-size: 0.88rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .bmc-box li { margin-bottom: 6px; }
+
+    /* Layout Específico do Canvas */
+    .col-2 { grid-row: span 2; }
+    .bmc-financeiro {
+      grid-column: span 5;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .bmc-footer-propósito {
+      margin-top: 20px;
+      background: #1e3a8a;
+      color: white;
+      padding: 20px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .bmc-footer-propósito p { font-size: 0.95rem; opacity: 0.9; }
+
+    /* 5. ESTILIZAÇÃO TEP */
+    .tep-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .tep-meta-item {
+      background: rgba(255,255,255,0.5);
+      padding: 15px 20px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+    }
+
+    .tep-meta-item strong { color: #2563eb; }
+
+    .tep-sprints-status {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .status-badge {
+      flex: 1;
+      padding: 15px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.15);
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .tep-blocos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .tep-bloco {
+      background: rgba(255,255,255,0.7);
+      padding: 25px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .tep-bloco h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: #1f2937;
+    }
+
+    .tep-bloco p { font-size: 0.95rem; color:#4b5563; line-height: 1.6; }
+
+    .tep-assinaturas {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 25px;
+    }
+
+    .tep-assinaturas h3 { font-size: 1.1rem; margin-bottom: 15px; color:#2563eb; }
+
+    .assinaturas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* RESPONSIVIDADE ADICIONAL */
+    @media(max-width:1024px){
+      .bmc-grid { grid-template-columns: 1fr; }
+      .col-2 { grid-row: span 1; }
+      .bmc-financeiro { grid-column: span 1; grid-template-columns: 1fr; }
+      .ishikawa-grid, .tep-blocos, .assinaturas-grid { grid-template-columns: 1fr; }
+    }
+
+    @media(max-width:900px){
+      .navbar{ flex-direction:column; gap:20px; }
+      .nav-links{ gap:20px; flex-wrap:wrap; justify-content:center; }
+      .hero h1{ font-size:2.8rem; }
+      .swot-grid, .tep-meta { grid-template-columns: 1fr; }
+    }
+
+    @media(max-width:600px){
+      .hero h1{ font-size:2.2rem; }
+      .section-title h2{ font-size:2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <h1>GuaruSeguro</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="desenvolvimento.html">Desenvolvimento</a></li>
+        <li><a href="solucao.html">Solução</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-tag">PLANEJAMENTO & ESTRATÉGIA</p>
+      <h1>Desenvolvimento do Projeto</h1>
+      <p class="hero-description">
+        Conheça a engenharia de gestão por trás da plataforma GuaruSeguro. Reunimos aqui todas as metodologias de mercado estruturadas pela nossa equipe — desde o mapeamento de processos até a validação do modelo de negócios — garantindo eficiência, controle de riscos e transparência em cada etapa.
+      </p>
+      <div class="hero-buttons">
+        <a href="#5w2h" class="btn-primary">Ver Cronograma</a>
+        <a href="#tep" class="btn-secondary">Termo de Encerramento</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="5w2h">
+    <div class="section-title">
+      <p>CRONOGRAMA DE AÇÃO</p>
+      <h2>Metodologia 5W2H</h2>
+    </div>
+    <div class="glass-container">
+
+      <h3 class="sprint-title">Sprint 1 - Ideação e Modelagem Inicial</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>O quê? (What)</th>
+              <th>Por quê? (Why)</th>
+              <th>Onde? (Where)</th>
+              <th>Quando? (When)</th>
+              <th>Quem? (Who)</th>
+              <th>Como? (How)</th>
+              <th>Quanto? (How much)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Busca de dados e formulação de ideias.</td>
+              <td>Essencial para a elaboração do projeto.</td>
+              <td>Em sites do Google.</td>
+              <td>20/02/26 - 27/02/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Utilizando conhecimentos prévios e pesquisas da web.</td>
+              <td>Custo de tempo de 7 dias.</td>
+            </tr>
+            <tr>
+              <td>Divisão de tarefas do grupo para elaborar o Sprint 1.</td>
+              <td>Essencial para não sobrecarregar ninguém do grupo.</td>
+              <td>Conversa pelo Whatsapp.</td>
+              <td>19/02/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Divisão baseada em habilidade dos integrantes.</td>
+              <td>Custo de tempo de 30 minutos.</td>
+            </tr>
+            <tr>
+              <td>Buscar orientações com o professor.</td>
+              <td>Para ter melhores resultados no projeto.</td>
+              <td>Feito na aula do professor Lucio. Colégio ENIAC.</td>
+              <td>23/02/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Com perguntas diretas.</td>
+              <td>Custo de tempo de apenas 2 a 5 minutos.</td>
+            </tr>
+            <tr>
+              <td>Formulação do Termo de Abertura do Projeto.</td>
+              <td>Essencial para a primeira entrega do projeto.</td>
+              <td>Feito no Google Docs.</td>
+              <td>27/02/26 - 01/03/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Escrevendo o que foi proposto no template do documento.</td>
+              <td>Custo de tempo de 3 dias.</td>
+            </tr>
+            <tr>
+              <td>Entrega do Termo de Abertura do Projeto.</td>
+              <td>Entrega obrigatória, vale nota.</td>
+              <td>Pelo Portal Acadêmico.</td>
+              <td>02/03/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Enviando o arquivo em PDF no Portal Acadêmico.</td>
+              <td>Custo de tempo de poucos minutos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sprint-title">Sprint 2 - Planejamento Estratégico</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>O quê? (What)</th>
+              <th>Por quê? (Why)</th>
+              <th>Onde? (Where)</th>
+              <th>Quando? (When)</th>
+              <th>Quem? (Who)</th>
+              <th>Como? (How)</th>
+              <th>Quanto? (How much)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dividimos tarefas do grupo para elaboração do Sprint 2.</td>
+              <td>Essencial para elaboração do projeto.</td>
+              <td>Conversas diretas no Colégio.</td>
+              <td>23/03/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Divisão baseada em habilidade dos integrantes.</td>
+              <td>Custo de tempo de 30 minutos.</td>
+            </tr>
+            <tr>
+              <td>Compreender e realizar diagrama de Ishikawa.</td>
+              <td>Essencial para a entrega do Sprint 2.</td>
+              <td>Estudos no Colégio e realização no Google Slides.</td>
+              <td>23/03/26 - 01/04/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Utilizando competências do Google Slides e conhecimentos prévios.</td>
+              <td>Custo de tempo de 3 horas.</td>
+            </tr>
+            <tr>
+              <td>Realizar a Matriz SWOT.</td>
+              <td>Essencial para a entrega do Sprint 2.</td>
+              <td>Realização no Google Slides.</td>
+              <td>23/03/26 - 01/04/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Utilizando competências do Google Slides.</td>
+              <td>Custo de tempo de 1 hora e 30 minutos.</td>
+            </tr>
+            <tr>
+              <td>Realizar 5W2H.</td>
+              <td>Essencial para a entrega do Sprint 2.</td>
+              <td>Feito no Google Slides.</td>
+              <td>01/04/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Descrevendo ações feitas na elaboração do projeto.</td>
+              <td>Custo de tempo de 2 horas.</td>
+            </tr>
+            <tr>
+              <td>Elaboração e entrega do Sprint 2.</td>
+              <td>Entrega obrigatória, vale nota.</td>
+              <td>Pelo Portal Acadêmico.</td>
+              <td>01/04/26</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Enviando o arquivo em PDF na Plataforma escolar.</td>
+              <td>Custo de tempo de poucos minutos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sprint-title">Sprint 3 - Desenvolvimento Final e Apresentação</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>O quê? (What)</th>
+              <th>Por quê? (Why)</th>
+              <th>Onde? (Where)</th>
+              <th>Quando? (When)</th>
+              <th>Quem? (Who)</th>
+              <th>Como? (How)</th>
+              <th>Quanto? (How much)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Estudos dirigidos à elaboração do Site.</td>
+              <td>Essencial para elaboração do Site.</td>
+              <td>Youtube, sites e cursos.</td>
+              <td>02/04/26 - Prazo indefinido</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Utilizando de pesquisas e cursos na Web.</td>
+              <td>Custo de tempo de 1 hora e 30 minutos.</td>
+            </tr>
+            <tr>
+              <td>Elaboração do Site.</td>
+              <td>Essencial para entrega final do projeto.</td>
+              <td>Visual Studio Code.</td>
+              <td>04/04/26 - Prazo indefinido</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Escrevendo e testando linhas de código no VS Code.</td>
+              <td>Custo de tempo de 1 mês.</td>
+            </tr>
+            <tr>
+              <td>Elaboração do Pitch Deck.</td>
+              <td>Essencial para apresentação final.</td>
+              <td>Feito no Google Apresentações.</td>
+              <td>15/04/26 - Prazo indefinido</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Utilizando de habilidades no aplicativo Google Slides.</td>
+              <td>Custo de tempo de 2 dias.</td>
+            </tr>
+            <tr>
+              <td>Entrega do Pitch Deck.</td>
+              <td>Entrega obrigatória, vale nota.</td>
+              <td>Entregue no Portal Acadêmico.</td>
+              <td>Final de Abril - Começo de Maio</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Enviando o arquivo no Portal Acadêmico.</td>
+              <td>Custo de tempo de 2 minutos.</td>
+            </tr>
+            <tr>
+              <td>Apresentação presencial do Projeto finalizado.</td>
+              <td>Apresentação obrigatória, vale nota.</td>
+              <td>Colégio ENIAC.</td>
+              <td>25/05/2026</td>
+              <td>Gustavo H., Erick M., Tiago L.</td>
+              <td>Utilização de roteiro, slides, conhecimentos e solução proposta.</td>
+              <td>Prazo estipulado de 10 minutos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="swot" style="background: rgba(235, 244, 255, 0.4);">
+    <div class="section-title">
+      <p>ANÁLISE DE CENÁRIO</p>
+      <h2>Matriz SWOT</h2>
+    </div>
+    <div class="glass-container swot-grid">
+      
+      <div class="swot-card swot-forcas">
+        <h3>✦ Forças <small>(Strengths)</small></h3>
+        <ul>
+          <li>Monitoramento e alertas em tempo real sobre enchentes;</li>
+          <li>Integração com dados meteorológicos públicos;</li>
+          <li>Impacto social positivo (redução de prejuízos e riscos);</li>
+          <li>Mapa interativo com áreas de risco.</li>
+        </ul>
+      </div>
+
+      <div class="swot-card swot-fraquezas">
+        <h3>⚠️ Fraquezas <small>(Weaknesses)</small></h3>
+        <ul>
+          <li>Dependência de dados públicos (podem estar desatualizados);</li>
+          <li>Conhecimentos ainda básicos em desenvolvimento de sistemas Web;</li>
+          <li>Dependência de conexão com internet;</li>
+          <li>Falhas na atualização em tempo real do site.</li>
+        </ul>
+      </div>
+
+      <div class="swot-card swot-oportunidades">
+        <h3>🚀 Oportunidades <small>(Opportunities)</small></h3>
+        <ul>
+          <li>Possibilidade de parcerias com prefeitura e instituições;</li>
+          <li>Expansão futura para outras cidades, aumentando o alcance;</li>
+          <li>Evolução tecnológica (novas ferramentas e dados);</li>
+          <li>Incentivos a projetos sustentáveis.</li>
+        </ul>
+      </div>
+
+      <div class="swot-card swot-ameacas">
+        <h3>🔥 Ameaças <small>(Threats)</small></h3>
+        <ul>
+          <li>Concorrência com outros aplicativos similares;</li>
+          <li>Falta de engajamento ou feedback dos usuários;</li>
+          <li>Baixa adesão da população;</li>
+          <li>Falta de dados confiáveis ou atualizados.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="ishikawa">
+    <div class="section-title">
+      <p>ANÁLISE DE CAUSA-RAIZ</p>
+      <h2>Diagrama de Ishikawa</h2>
+    </div>
+    <div class="glass-container">
+      <div class="ishikawa-grid">
+        
+        <div class="ishikawa-box">
+          <h3>Tecnologia</h3>
+          <ul>
+            <li>Código mal otimizado</li>
+            <li>Bugs no sistema</li>
+          </ul>
+        </div>
+
+        <div class="ishikawa-box">
+          <h3>Dados</h3>
+          <ul>
+            <li>Dados desatualizados</li>
+            <li>Atraso na coleta de dados</li>
+          </ul>
+        </div>
+
+        <div class="ishikawa-box">
+          <h3>Pessoas</h3>
+          <ul>
+            <li>Equipe pouco experiente</li>
+            <li>Falta de treinamento</li>
+          </ul>
+        </div>
+
+        <div class="ishikawa-box">
+          <h3>Processo</h3>
+          <ul>
+            <li>Falta de monitoramento</li>
+            <li>Possíveis faltas de testes</li>
+          </ul>
+        </div>
+
+        <div class="ishikawa-box">
+          <h3>Infraestrutura</h3>
+          <ul>
+            <li>Servidor lento</li>
+            <li>Servidor pouco capacitado</li>
+          </ul>
+        </div>
+
+        <div class="ishikawa-box">
+          <h3>Externo</h3>
+          <ul>
+            <li>Falhas de internet</li>
+            <li>APIs instáveis</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="ishikawa-efeito">
+        Problema Central: Falhas na atualização em tempo real do site
+      </div>
+    </div>
+  </section>
+
+  <section id="canvas" style="background: rgba(235, 244, 255, 0.4);">
+    <div class="section-title">
+      <p>MODELO DE NEGÓCIO</p>
+      <h2>Business Model Canvas</h2>
+    </div>
+    <div class="glass-container">
+      <div class="bmc-grid">
+        
+        <div class="bmc-box col-2">
+          <h3>1. Segmentos de Clientes</h3>
+          <ul>
+            <li>• Moradores de Guarulhos (público principal)</li>
+            <li>• Defesa Civil e órgãos públicos municipais</li>
+            <li>• Escolas e instituições educacionais</li>
+            <li>• Empresas locais (logística, comércio, transporte)</li>
+            <li>• População em áreas de risco de enchentes</li>
+          </ul>
+        </div>
+
+        <div class="bmc-box">
+          <h3>7. Atividades Principais</h3>
+          <ul>
+            <li>• Desenvolvimento e manutenção do site</li>
+            <li>• Integração com dados meteorológicos</li>
+            <li>• Atualização de mapas de risco</li>
+            <li>• Testes de usabilidade</li>
+            <li>• Análise de dados climáticos</li>
+            <li>• Divulgação e conscientização</li>
+          </ul>
+        </div>
+
+        <div class="bmc-box col-2">
+          <h3>2. Proposta de Valor</h3>
+          <ul>
+            <li>• Alertas preventivos de chuva e risco de alagamento em tempo real</li>
+            <li>• Mapa interativo com áreas de risco da cidade</li>
+            <li>• Acesso fácil a previsões do tempo atualizadas</li>
+            <li>• Histórico climático para análise e prevenção</li>
+            <li>• Maior segurança e redução de prejuízos causados por enchentes</li>
+            <li>• Informação rápida, acessível e localizada para Guarulhos</li>
+          </ul>
+        </div>
+
+        <div class="bmc-box">
+          <h3>4. Relacionamento</h3>
+          <ul>
+            <li>• Interface simples e intuitiva (autoatendimento)</li>
+            <li>• Atualizações automáticas de dados</li>
+            <li>• Sistema de alertas personalizados</li>
+            <li>• Comunicação direta de risco (notificações)</li>
+            <li>• Conteúdo educativo sobre prevenção de enchentes</li>
+          </ul>
+        </div>
+
+        <div class="bmc-box col-2">
+          <h3>3. Canais</h3>
+          <ul>
+            <li>• Plataforma web (principal)</li>
+            <li>• Acesso via celular e computador</li>
+            <li>• Possível integração futura com notificações (push/email)</li>
+            <li>• Parcerias com escolas e prefeitura para divulgação</li>
+            <li>• Redes sociais para alertas e conscientização</li>
+          </ul>
+        </div>
+
+        <div class="bmc-box">
+          <h3>6. Recursos Principais</h3>
+          <ul>
+            <li>• Plataforma web (HTML, CSS, JavaScript)</li>
+            <li>• APIs ou bases de dados meteorológicos públicas</li>
+            <li>• Sistema de mapas interativos</li>
+            <li>• Banco de dados climático</li>
+            <li>• Equipe de desenvolvimento e pesquisa</li>
+            <li>• Infraestrutura de hospedagem</li>
+          </ul>
+        </div>
+
+        <div class="bmc-box">
+          <h3>8. Parcerias Principais</h3>
+          <ul>
+            <li>• Defesa Civil de Guarulhos</li>
+            <li>• Instituições meteorológicas (ex: INMET)</li>
+            <li>• Prefeituras e órgãos ambientais</li>
+            <li>• Escolas e universidades</li>
+            <li>• ONGs ambientais</li>
+            <li>• Fornecedores de dados climáticos</li>
+          </ul>
+        </div>
+
+        <div class="bmc-financeiro">
+          <div class="bmc-box">
+            <h3>9. Estrutura de Custos</h3>
+            <ul>
+              <li>• Desenvolvimento da plataforma</li>
+              <li>• Hospedagem e manutenção do site</li>
+              <li>• Integração com APIs de dados</li>
+              <li>• Design e interface do sistema</li>
+              <li>• Atualizações e suporte técnico</li>
+              <li>• Divulgação e campanhas educativas</li>
+            </ul>
+          </div>
+
+          <div class="bmc-box">
+            <h3>5. Fontes de Receita</h3>
+            <ul>
+              <li>• Financiamento público (prefeitura, projetos ambientais)</li>
+              <li>• Parcerias com órgãos ambientais</li>
+              <li>• Apoio de ONGs e projetos sustentáveis</li>
+              <li>• Patrocínio de empresas locais</li>
+              <li>• Possível versão premium futura (dados avançados para empresas)</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="bmc-footer-propósito">
+        <strong>PROPÓSITO E IMPACTO</strong>
+        <p>Transformar a tecnologia em uma ferramenta de prevenção e proteção precoce, alinhando-se aos Objetivos de Desenvolvimento Sustentável da ONU (Cidades Sustentáveis & Ação Contra a Mudança Global do Clima). Reduzir prejuízos materiais, aumentar a segurança e a resiliência urbana da população de Guarulhos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tep">
+    <div class="section-title">
+      <p>ENTREGA FINAL</p>
+      <h2>Termo de Encerramento de Projeto (TEP)</h2>
+    </div>
+    <div class="glass-container">
+      
+      <div class="tep-meta">
+        <div class="tep-meta-item"><strong>Nome do Projeto:</strong> GuaruSeguro</div>
+        <div class="tep-meta-item"><strong>Data de Início:</strong> 02/02/2026</div>
+        <div class="tep-meta-item"><strong>Data de Término:</strong> 24/05/2026</div>
+      </div>
+
+      <div class="tep-sprints-status">
+        <div class="status-badge">Sprint 1: ✓ Concluído</div>
+        <div class="status-badge">Sprint 2: ✓ Concluído</div>
+        <div class="status-badge">Sprint 3: ✓ Concluído</div>
+      </div>
+
+      <div class="tep-blocos">
+        <div class="tep-bloco">
+          <h3>O que funcionou bem</h3>
+          <p>Comunicação e divisão de tarefas entre o grupo, já que as atividades foram divididas e feitas por todos os integrantes de forma equilibrada.</p>
+        </div>
+        
+        <div class="tep-bloco">
+          <h3>O que não funcionou bem</h3>
+          <p>A dependência de dados de APIs externas para a entrega em tempo real, o que pode vir a causar erros ou instabilidades fora do controle do time.</p>
+        </div>
+
+        <div class="tep-bloco">
+          <h3>Sugestões para o futuro</h3>
+          <p>Expansão e escalabilidade do mapa interativo e do sistema inteligente de alertas automatizados para diversos outros países e municípios afetados.</p>
+        </div>
+      </div>
+
+      <div class="tep-assinaturas">
+        <h3>Responsáveis pelo Projeto & Aprovação Final</h3>
+        <div class="assinaturas-grid">
+          <div class="tep-meta-item">
+            <strong>Gustavo Henrique Lacerda de Mello</strong><br>
+            <small>RM: 102412026 | Assinado em: 23/05/2026</small>
+          </div>
+          <div class="tep-meta-item">
+            <strong>Tiago Luiz Silva de Santana</strong><br>
+            <small>RM: 100492026 | Assinado em: 24/05/2026</small>
+          </div>
+          <div class="tep-meta-item">
+            <strong>Erick de Menezes Ferreira Filho</strong><br>
+            <small>RM: 102562026 | Assinado em: 24/05/2026</small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
+
+  // 1. Ativa a animação de entrada assim que o DOM estiver pronto
+  // Usamos um pequeno timeout de 50ms para garantir que o navegador registre o estado inicial invisível
+  setTimeout(() => {
+    body.classList.add('fade-enter-active');
+  }, 50);
+
+  // 2. Captura os links da navbar e botões (exceto links internos de âncora como #mapa)
+  const links = document.querySelectorAll('.nav-links a, .hero-buttons a:not([href^="#"])');
+  
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Verifica se o link é para outra página mesmo
+      if (link.hostname === window.location.hostname) {
+        e.preventDefault(); // Segura a mudança instantânea de página
+        const targetUrl = link.href;
+        
+        // Remove a classe de entrada e adiciona a de saída
+        body.classList.remove('fade-enter-active');
+        body.classList.add('fade-exit-active');
+        
+        // Aguarda os 400ms da animação do CSS terminar antes de navegar de fato
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 400);
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
