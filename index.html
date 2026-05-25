@@ -181,6 +181,153 @@
 
   </section>
 
+  <section class="problema" id="problema">
+    <div class="section-title">
+      <p>O Desafio Urbano</p>
+      <h2>Definição do Problema</h2>
+    </div>
+
+    <div class="problema-bloco-unico">
+      
+      <div class="problema-texto-interno">
+        <h3>Enchentes e Impactos Climáticos em Guarulhos</h3>
+        <p>
+          O município de Guarulhos enfrenta desafios históricos severos relacionados a alagamentos e enchentes repentinas durante os períodos de chuvas intensas. O crescimento urbano acelerado, combinado com áreas de topografia vulnerável, expõe a população a riscos constantes.
+        </p>
+        <p>
+          A falta de canais centralizados com informações rápidas e localizadas impede que motoristas, comerciantes e moradores de áreas de risco tomem medidas preventivas a tempo. Isso resulta em sérios prejuízos materiais, paralisação da mobilidade urbana e, principalmente, coloca vidas em risco. O <strong>GuaruSeguro</strong> atua diretamente nessa lacuna, transformando dados em alertas que protegem o cidadão.
+        </p>
+      </div>
+
+      <div class="problema-foto-interna-wrapper">
+        <img src="https://images.unsplash.com/photo-1547683905-f686c993aae5?q=80&w=800" alt="Alagamento em via urbana de Guarulhos">
+        <div class="foto-legenda-interna">Impactos das enchentes na mobilidade e infraestrutura urbana</div>
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+    /* O grande bloco container com o estilo visual do seu site */
+    .problema-bloco-unico {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 45px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 28px;
+      padding: 45px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+
+    /* Leve efeito de elevação ao passar o mouse no bloco inteiro */
+    .problema-bloco-unico:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
+    }
+
+    /* Ajuste da área de texto interna */
+    .problema-texto-interno {
+      flex: 1.2;
+    }
+
+    .problema-texto-interno h3 {
+      color: #2563eb;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .problema-texto-interno p {
+      color: #4b5563;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin-bottom: 18px;
+    }
+
+    .problema-texto-interno p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Container interno da foto (limpo, sem bordas redundantes) */
+    .problema-foto-interna-wrapper {
+      flex: 1;
+      position: relative;
+      height: 380px; /* Altura ideal para casar simetricamente com o texto ao lado */
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .problema-foto-interna-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    /* Efeito sutil de zoom na imagem quando o usuário focar no bloco */
+    .problema-bloco-unico:hover .problema-foto-interna-wrapper img {
+      transform: scale(1.03);
+    }
+
+    /* Legenda elegante sobre a foto */
+    .foto-legenda-interna {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* RESPONSIVIDADE (Ajuste dinâmico para telas menores) */
+    @media(max-width: 968px) {
+      .problema-bloco-unico {
+        flex-direction: column; /* Texto em cima, foto embaixo */
+        gap: 35px;
+        padding: 35px;
+      }
+
+      .problema-texto-interno {
+        text-align: center; /* Centraliza a leitura em tablets/celulares */
+      }
+
+      .problema-foto-interna-wrapper {
+        width: 100%;
+        max-width: 550px;
+        height: 320px;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .problema-bloco-unico {
+        padding: 25px 20px;
+        border-radius: 24px;
+      }
+
+      .problema-texto-interno h3 {
+        font-size: 1.35rem;
+      }
+
+      .problema-foto-interna-wrapper {
+        height: 240px;
+      }
+    }
+  </style>
+
   <!-- IDENTIFICAÇÃO -->
 
   <section class="identificacao">
@@ -216,7 +363,7 @@
         </h3>
 
         <p>
-          Desenvolvimento e Pesquisa
+        Ensino Médio Integrado ao curso Técnico de Informática
         </p>
 
       </div>
@@ -238,7 +385,7 @@
         </h3>
 
         <p>
-          Front-end e Design
+         Ensino Médio Integrado ao curso Técnico de Informática
         </p>
 
       </div>
@@ -261,7 +408,7 @@
         </h3>
 
         <p>
-          Organização e Documentação
+         Ensino Médio Integrado ao curso Técnico de Informática
         </p>
 
       </div>
