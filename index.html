@@ -887,31 +887,29 @@ body {
   /* VIDEO */
   /* ========================= */
 
-  .video-wrapper{
+/* ========================= */
+  /* VIDEO (PROPORÇÃO 16:9 RESPONSIVA) */
+  /* ========================= */
 
-    background:rgba(255,255,255,0.55);
-
-    backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,0.4);
-
-    border-radius:28px;
-
-    padding:18px;
-
-    overflow:hidden;
-
-    box-shadow:
-      0 10px 30px rgba(0,0,0,0.08);
+  .video-wrapper {
+    max-width: 1000px; /* Limita o tamanho máximo em telas muito grandes para não ficar gigante */
+    margin: 0 auto; /* Centraliza o bloco na página */
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 28px;
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
 
-  iframe{
-
+  iframe {
     width: 100%;
-
-    border:none;
-
-    border-radius:20px;
+    aspect-ratio: 16 / 9; /* Força matematicamente a proporção de cinema */
+    height: auto; /* Permite que a altura mude conforme a largura diminui */
+    border: none;
+    border-radius: 20px;
+    display: block; /* Remove pequenos espaços em branco abaixo do player */
   }
 
   /* ========================= */
