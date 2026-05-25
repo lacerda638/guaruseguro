@@ -961,31 +961,34 @@ body {
   }
 </style>
 
-  <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
 
-  // 1. Ativa a animação de entrada assim que o DOM estiver pronto
-  // Usamos um pequeno timeout de 50ms para garantir que o navegador registre o estado inicial invisível
+  // Garante que o body comece a transição de entrada de forma limpa
   setTimeout(() => {
     body.classList.add('fade-enter-active');
   }, 50);
 
-  // 2. Captura os links da navbar e botões (exceto links internos de âncora como #mapa)
+  // Captura os links, mas adiciona uma proteção extra para o GitHub Pages
   const links = document.querySelectorAll('.nav-links a, .hero-buttons a:not([href^="#"])');
   
   links.forEach(link => {
     link.addEventListener('click', (e) => {
-      // Verifica se o link é para outra página mesmo
+      // Se for um link externo ou se clicou com o botão do meio/Ctrl, deixa o navegador agir normal
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+
       if (link.hostname === window.location.hostname) {
-        e.preventDefault(); // Segura a mudança instantânea de página
         const targetUrl = link.href;
         
-        // Remove a classe de entrada e adiciona a de saída
+        // Evita bugar se o usuário clicar para a mesma página que já está
+        if (targetUrl === window.location.href) return;
+
+        e.preventDefault(); 
+        
         body.classList.remove('fade-enter-active');
         body.classList.add('fade-exit-active');
         
-        // Aguarda os 400ms da animação do CSS terminar antes de navegar de fato
         setTimeout(() => {
           window.location.href = targetUrl;
         }, 400);
