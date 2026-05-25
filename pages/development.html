@@ -8,35 +8,35 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-/* O body agora fica normal para não quebrar o 'position: fixed' da navbar */
-body {
-  background:#ebf4ff;
-  color:#111827;
-}
+    /* O body agora fica normal para não quebrar o 'position: fixed' da navbar */
+    body {
+      background:#ebf4ff;
+      color:#111827;
+    }
 
-/* Criamos a classe para o container de conteúdo que vai transicionar */
-.page-content {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
+    /* Criamos a classe para o container de conteúdo que vai transicionar */
+    .page-content {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
 
-/* Classe de entrada suave */
-.page-content.fade-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-}
+    /* Classe de entrada suave */
+    .page-content.fade-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-/* Classe de saída suave */
-.page-content.fade-exit-active {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-    .fade-exit {
-  opacity: 0 !important;
-  transform: translateY(-8px) !important;
-  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
-}
+    /* Classe de saída suave */
+    .page-content.fade-exit-active {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+        .fade-exit {
+      opacity: 0 !important;
+      transform: translateY(-8px) !important;
+      transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    }
     /* CSS Base e Navbar fornecidos */
     *{
       margin:0;
